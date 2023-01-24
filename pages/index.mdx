@@ -1,0 +1,75 @@
+# Welcome to Nextra
+
+Hello, world!
+
+export const getStaticProps = async () => {
+	const fs = require('fs');
+
+	const modulesExist = fs.existsSync('pages/audio');
+
+	if (!modulesExist) {
+		const modules = fs.readdirSync('love-api/modules');
+
+		modules.map((mod) => {
+			fs.mkdir(`pages/${mod}`, { recursive: false }, (err) => {
+				if (err !== null) console.log('err appeared', mod, err);
+			});
+
+			const mod_capitalize = mod[0].toUpperCase() + mod.slice(1);
+
+			fs.writeFileSync(`pages/${mod}.mdx`, `# ${mod_capitalize}`);
+		});
+	}
+
+	{/* TEST WITH LUA PARSER */}
+
+	{/* const parser = require('luaparse');
+
+	const luaAudioFile = fs.readFileSync('love-api/modules/audio/Audio.lua');
+
+	const jsObj = parser.parse(luaAudioFile.toString()); */}
+
+	{/* jsObj.body.forEach((a) => {
+		console.log(a.type)
+
+		if (a.variables) {
+			a.variables.forEach((variable) => {
+				console.log('variables',variable)
+			})
+		}
+
+		if (a.init) {
+			a.init.forEach((inits) => {
+				console.log('inits',inits)
+			})
+		}
+
+		if (a.arguments) {
+			a.arguments.forEach((args) => {
+				console.log('args',args)
+
+				args.fields.forEach((field) => {
+					console.log('field', field.key, field.value)
+				})
+			})
+		}
+	}); */}
+
+	{/* END TEST WITH LUA PARSER */}
+
+	{/* TEST WITH REGEX */}
+
+	const luaAudioFile = fs.readFileSync('love-api/modules/audio/Audio.lua').toString();
+
+	const rgxDescription = /(?<=description\s=\s')[^.]*/;
+
+	const a = rgxDescription.exec(luaAudioFile);
+
+	console.log(a[0]);
+
+	{/* END TEST WITH REGEX */}
+
+	return {
+		props: {}
+	}
+}
