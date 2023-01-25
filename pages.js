@@ -1,5 +1,8 @@
 import fs from 'fs';
-import Text from './text';
+import Text from './text.js';
+
+// const fs = require('fs')
+// const Text = require('./text')
 
 let fileText = '';
 
@@ -32,4 +35,6 @@ const Pages = () => {
 	}
 }
 
-export default Pages;
+Pages();
+
+// export default Pages;

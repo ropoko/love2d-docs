@@ -1,5 +1,8 @@
 import fs from 'fs';
-import Utils from './utils';
+import Utils from './utils.js';
+
+// const fs = require('fs')
+// const Utils = require('./utils')
 
 class Text {
 	_module = '';
