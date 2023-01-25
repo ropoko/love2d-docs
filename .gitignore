@@ -25,3 +25,5 @@ love-api
 
 # NextJS
 .next
+
+!pages/index.mdx
