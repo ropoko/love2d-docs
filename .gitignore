@@ -26,4 +26,6 @@ love-api
 # NextJS
 .next
 
+pages/*.mdx
 !pages/index.mdx
+!pages/_meta.json
