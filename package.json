@@ -1,8 +1,9 @@
 {
 	"type": "module",
 	"scripts": {
-		"start": "next",
-		"build": "git clone https://github.com/love2d-community/love-api && node pages.js && next build"
+		"start": "yarn build:clean && yarn build && next",
+		"build": "git clone https://github.com/love2d-community/love-api && node src/pages.js && next build",
+		"build:clean": "rm -rf love-api"
 	},
 	"dependencies": {
 		"luaparse": "^0.3.1",

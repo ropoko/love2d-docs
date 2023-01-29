@@ -1,8 +1,7 @@
 import fs from 'fs';
 import Text from './text.js';
 
-// const fs = require('fs')
-// const Text = require('./text')
+import Utils from './utils.js';
 
 let fileText = '';
 
@@ -19,13 +18,21 @@ const Pages = () => {
 				if (err !== null) console.log('err appeared', mod, err);
 			});
 
-			const mod_capitalize = mod[0].toUpperCase() + mod.slice(1);
+			const moduleCapitalized = Utils.capitalize(mod)
 
-			fileText += `# ${mod_capitalize} \n`
+			fileText += `# ${moduleCapitalized} \n`
 
 			const text = new Text(mod);
 
 			fileText += text.description();
+
+			if (text.types().length > 0) {
+				fileText += '\n\n ## Types';
+			}
+
+			text.types().forEach((type) => {
+				fileText += `\n - ${type} \n`
+			});
 
 			fs.writeFileSync(`pages/${mod}.mdx`, fileText);
 
@@ -36,5 +43,3 @@ const Pages = () => {
 }
 
 Pages();
-
-// export default Pages;
