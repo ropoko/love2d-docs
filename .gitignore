@@ -29,3 +29,24 @@ love-api
 pages/*.mdx
 !pages/index.mdx
 !pages/_meta.json
+
+# generated pages
+app/audio/
+app/data/
+app/event/
+app/filesystem/
+app/font/
+app/graphics/
+app/image/
+app/joystick/
+app/keyboard/
+app/math/
+app/mouse/
+app/physics/
+app/sound/
+app/thread/
+app/timer/
+app/touch/
+app/video/
+app/system/
+app/window/

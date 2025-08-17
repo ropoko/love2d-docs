@@ -1,12 +1,12 @@
 import fs from 'fs';
-import Utils from './utils.js';
+import Utils from './utils';
 
-class Text {
+export default class Text {
 	_module = '';
 
 	luaFile = '';
 
-	constructor(module) {
+	constructor(module: string) {
 		if (Utils.moduleExists(module)) {
 			this._module = module;
 
@@ -23,7 +23,7 @@ class Text {
 		const rgxDescription = /(?<=description\s=\s')[^.]*/;
 		const desc = rgxDescription.exec(this.luaFile);
 
-		return desc[0];
+		return desc?.[0];
 	}
 
 	types() {
@@ -32,7 +32,7 @@ class Text {
 		if (typesExist) {
 			const types = fs.readdirSync(`love-api/modules/${this._module}/types`);
 
-			const titleTypes = [];
+			const titleTypes: string[] = [];
 
 			types.forEach((type) => {
 				titleTypes.push(Utils.capitalize(type));
@@ -44,5 +44,3 @@ class Text {
 		return [];
 	}
 }
-
-export default Text;
