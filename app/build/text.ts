@@ -1,5 +1,6 @@
 import fs from 'fs';
 import Utils from './utils';
+import { parse } from 'luaparse';
 
 export default class Text {
 	_module = '';
@@ -39,6 +40,37 @@ export default class Text {
 			});
 
 			return titleTypes;
+		}
+
+		return [];
+	}
+
+	functions() {
+		const moduleFile = fs.readFileSync(`love-api/modules/${this._module}/${this._module}.lua`).toString();
+
+		const functions = parse(moduleFile)
+
+		console.log(functions);
+		// .body.filter((item) => item.type === 'FunctionDeclaration');
+
+		// return functions.map((func) => func.name);
+
+		return []
+	}
+
+	enums() {
+		const enumsExist = fs.existsSync(`love-api/modules/${this._module}/enums`);
+
+		if (enumsExist) {
+			const enums = fs.readdirSync(`love-api/modules/${this._module}/enums`);
+
+			const titleEnums: string[] = [];
+
+			enums.forEach((enumName) => {
+				titleEnums.push(Utils.capitalize(enumName));
+				});
+
+			return titleEnums;
 		}
 
 		return [];
